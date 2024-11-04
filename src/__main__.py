@@ -25,16 +25,16 @@ if openai_access_token:
     try:
         with open(pdf_file_path, "rb") as pdf_file:
             pdf_content = pdf_file.read()
-            st.write("Le fichier PDF a été chargé avec succès.")
+            st.write("Chargement de la base de connaissance en cours.")
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as f:
                 f.write(pdf_content)
                 app.add(f.name, data_type="pdf_file")
             os.remove(f.name)
-            st.success("Fichier PDF ajouté à la base de connaissances !")
+            st.success("Base de connaissance mise à jour !")
     except FileNotFoundError:
-        st.write("Le fichier PDF spécifié n'existe pas dans le répertoire.")
+        st.write("La base de connaissance n'a pas été bien chargée.")
 
-    prompt = st.text_input("Ask a question about the PDF")
+    prompt = st.text_input("Demandez nous votre film et on vous le décrit")
 
     if prompt:
         answer = app.chat(prompt)
